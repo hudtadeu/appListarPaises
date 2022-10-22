@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Countries from './components/Countries';
 
 
 export default class App extends Component {
@@ -14,7 +15,7 @@ export default class App extends Component {
     const res = await fetch('https://restcountries.eu/rest/v2/all');
     const json = await res.json();
 
-    const allCountries = json.map (({name, numericCode, flag, population}) => {
+    const allCountries = json.map(({ name, numericCode, flag, population }) => {
       return {
         id: numericCode,
         name,
@@ -34,6 +35,7 @@ export default class App extends Component {
     return (
       <div className="container">
         <h1>React Countries</h1>
+        <Countries countries={allCountries} />
       </div>
     );
   }
