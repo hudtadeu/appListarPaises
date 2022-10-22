@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Country from './Country';
 
 export default class Countries extends Component {
   render() {
@@ -8,8 +9,12 @@ export default class Countries extends Component {
       <div>
         <ul>
           {
-            countries.map(country => {
-              return <li key={country.id}>{country.name}</li>
+            countries.map((country) => {
+              return (
+                <li key={country.id}>
+                  <Country country={country} />
+                </li>
+              );
             })
           }
         </ul>
