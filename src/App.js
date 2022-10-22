@@ -1,33 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { getNewTimestamp } from './helpers/dateTimeHelpers';
+import React, { Component } from 'react';
 
-export default function App() {
-  const [clickArray, setClickArray] = useState([]);
 
-  useEffect(()=> {
-    document.title = clickArray.length;
-  })
+export default class App extends Component {
+  constructor() {
+    super();
 
-  function handleClick() {
-    const newClickArray = Object.assign([], clickArray);
-    newClickArray.push(getNewTimestamp());
-
-    setClickArray(newClickArray);
+    this.state = {
+      allCountries: [],
+    };
   }
 
-  return (
-    <div>
-      <h1>
-        React e <em>Hooks</em>
-      </h1>
+  async componentDidMount() {
+    const res = await fetch('https://restcountries.eu/rest/v2/all');
+    const json = await res.json();
 
-      <button onClick={handleClick}>Clique Aqui</button>
+    const allCountries = json.map (({name, numericCode, flag, population}) => {
+      return {
+        id: numericCode,
+        name,
+        flag,
+        population
+      }
+    });
 
-      <ul>{clickArray.map(item => {
-        return <li key={item}>{item}</li>;
-      })}
-      </ul>
-    </div>
-  );
+    this.state({
+      allCountries,
+    });
+  }
+
+  render() {
+    const { allCountries } = this.state;
+
+    return (
+      <div className="container">
+        <h1>React Countries</h1>
+      </div>
+    );
+  }
 }
-
