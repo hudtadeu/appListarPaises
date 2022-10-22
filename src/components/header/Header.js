@@ -7,12 +7,12 @@ export default class Header extends Component {
   };
 
   render() {
-    const { filter } = this.props;
+    const { filter, countCountry, totalPopulation } = this.props;
     return (
       <div>
         <input type="text" value={filter} onChange={this.handleInputChange} />
-        <span>Países: </span>
-        <span>População: </span>
+        <span>Países: {countCountry} </span>
+        <span>População: {totalPopulation} </span>
       </div>
     )
   }
