@@ -12,7 +12,7 @@ export default class Header extends Component {
       <div>
         <input type="text" value={filter} onChange={this.handleInputChange} />
         <span>Países: {countCountry} </span>
-        <span>População: {totalPopulation} </span>
+        <span>População: {formatNumber(totalPopulation)} </span>
       </div>
     )
   }
